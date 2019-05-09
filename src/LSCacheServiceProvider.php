@@ -25,6 +25,7 @@ class LSCacheServiceProvider extends ServiceProvider
     {
         $router->aliasMiddleware('lscache', \Litespeed\LSCache\LSCacheMiddleware::class);
         $router->aliasMiddleware('lstags', \Litespeed\LSCache\LSTagsMiddleware::class);
+        $router->aliasMiddleware('lsvary', \Litespeed\LSCache\LSVaryMiddleware::class);
         $kernel->pushMiddleware(\Litespeed\LSCache\LSCacheMiddleware::class);
         $this->publishes([
             __DIR__ . '/../config/lscache.php' => config_path('lscache.php'),

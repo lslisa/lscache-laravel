@@ -116,6 +116,36 @@ Route::get('/view', function() {
 })->middleware(['lscache:private', 'lstags:public:pubtag1;public:pubtag2;public:pubtag3;privtag1;privtag2']);
 ```
 
+### vary
+
+Just as with tags, you can also set the `X-LiteSpeed-Vary` header which can be used for generating different cache files depending on cookies or specific values. To use this, you can use the `lsvary` middleware.
+
+If we take an example of a password protected page:
+
+```php
+Route::get('/super-secret', function() {
+    return view('super-secret');
+})->middleware(['lscache:private;max-age=300', 'lsvary:cookie=password']);
+```
+
+The above example checks for the specified vary cookie `password` for that URL.
+
+You could also send a value back such as `ismobile`:
+
+```php
+Route::get('/super-secret', function() {
+    return view('super-secret');
+})->middleware(['lscache:private;max-age=300', 'lsvary:value=ismobile']);
+```
+
+Or even do both:
+
+```php
+Route::get('/super-secret', function() {
+    return view('super-secret');
+})->middleware(['lscache:private;max-age=300', 'lsvary:value=ismobile;cookie=password']);
+```
+
 ### purge
 
 If we have an admin interface that controls for example a blog, when you publish a new article, you might want to purge the frontpage of the blog so the article appears in the overview.
