@@ -6,6 +6,7 @@ It provides two middlewares and one facade:
 
 - LSCache Middleware to control the cache-control header for LiteSpeed LSCache
 - LSTags Middleware to control the tag header for LiteSpeed LSCache
+- LSVary Middleware to control the vary header for LiteSpeed LSCache
 - LSCache facade to handle purging
 
 ## Installation
